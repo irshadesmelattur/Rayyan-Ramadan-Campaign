@@ -104,6 +104,7 @@ opacity:0.9;
 margin-top:15px;
 font-size:12px;
 color:#777;
+display:none;
 }
 
 </style>
@@ -125,7 +126,7 @@ color:#777;
 
 <div id="buttons"></div>
 
-<div class="footer">
+<div class="footer" id="footerNote">
 Choose the correct category before starting the quiz
 </div>
 
@@ -150,9 +151,11 @@ const quizEnd = new Date("2026-03-14T16:50:00+05:30").getTime();
 function updatePage(){
 
 const now = new Date().getTime();
+
 const msg = document.getElementById("messageBox");
 const timer = document.getElementById("timer");
 const buttons = document.getElementById("buttons");
+const footer = document.getElementById("footerNote");
 
 if(now < studentsStart){
 
@@ -163,14 +166,15 @@ let distance=studentsStart-now;
 showTimer(distance);
 
 buttons.innerHTML="";
+footer.style.display="none";
 
 }
 
 else if(now >= studentsStart && now < studentsEnd){
 
 msg.innerHTML="";
-
 timer.innerHTML="";
+footer.style.display="block";
 
 buttons.innerHTML=`
 
@@ -203,14 +207,15 @@ let distance=parentsStart-now;
 showTimer(distance);
 
 buttons.innerHTML="";
+footer.style.display="none";
 
 }
 
 else if(now >= parentsStart && now < quizEnd){
 
 msg.innerHTML="";
-
 timer.innerHTML="";
+footer.style.display="none";
 
 buttons.innerHTML=`
 
@@ -225,10 +230,9 @@ Parents Quiz
 else{
 
 msg.innerHTML="<b>Quiz Over</b>";
-
 timer.innerHTML="";
-
 buttons.innerHTML="";
+footer.style.display="none";
 
 }
 
